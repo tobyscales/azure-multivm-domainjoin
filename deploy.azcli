@@ -1,0 +1,16 @@
+## Default Variables
+$resourceGroup = "myResourceGroup"
+$location = "westus2"
+$parameter1 = "parameter1"
+$parameter2 = $parameter2"
+
+## Parameter Sets
+$defaultParams = "parameter1=$parameter1 parameter2=$parameter2"
+$customParams = "parameter1=$parameter1 parameter2=customParam"
+
+## Full Deployment
+az group create --name $resourceGroup
+az group deployment create --template-file azuredeploy.json --resource-group $resourceGroup --parameters $defaultParams
+
+## Alternate Deployment
+az group deployment create --template-file azuredeploy.json --resource-group $resourceGroup --parameters $customParams
