@@ -129,15 +129,12 @@
         }
     },
     "variables": {
-        //If left blank the VM, vnet and subnet name are dynamically generated from the ResourceGroup name.
         "baseName": "[take(replace(replace(resourceGroup().name, ' ', ''), '_', '-'),sub(12,parameters('suffixLength')))]",
         "virtualMachineName": "[if(equals('default', parameters('virtualMachineName')),concat('vm-', variables('baseName')),parameters('virtualMachineName'))]",
         "virtualNetworkName": "[if(equals('default', parameters('virtualNetworkName')),concat('vn-', variables('baseName')),parameters('virtualNetworkName'))]",
         "subnetName": "[concat('sn-', variables('baseName'))]",
         "virtualNetworkRef": "[resourceId('Microsoft.Network/virtualnetworks', variables('virtualNetworkName'))]",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets',variables('virtualNetworkName'),variables('subnetName'))]",
-        //Set of bit flags that define the join options. Default value of 3 is a combination of NETSETUP_JOIN_DOMAIN (0x00000001) & NETSETUP_ACCT_CREATE (0x00000002) i.e. will join the domain and create the account on the domain. 
-        //For more information see https://msdn.microsoft.com/en-us/library/aa392154(v=vs.85).aspx
         "domainJoinOptions": 3,
         "Ubuntu": {
             "publisher": "Canonical",
@@ -169,7 +166,6 @@
     },
     "resources": [
         {
-            //"condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
             "condition": "[not(empty(variables('virtualNetworkRef')))]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2017-09-01",
