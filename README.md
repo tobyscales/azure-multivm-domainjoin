@@ -1,4 +1,4 @@
-# Blank Template
+# Azure Multi-VM and Domain Join Template
 
 ![Azure Public Test Date](https://azurequickstartsservice.blob.core.windows.net/badges/100-blank-template/PublicLastTestDate.svg)
 ![Azure Public Test Result](https://azurequickstartsservice.blob.core.windows.net/badges/100-blank-template/PublicDeployment.svg)
@@ -9,9 +9,7 @@
 ![Best Practice Check](https://azurequickstartsservice.blob.core.windows.net/badges/100-blank-template/BestPracticeResult.svg)
 ![Cred Scan Check](https://azurequickstartsservice.blob.core.windows.net/badges/100-blank-template/CredScanResult.svg)
 
-This is an empty template and parameters file with the schema reference and top-level properties defined.
-
-
+This template creates <i>n</i> number of VMs with suffixed names and optionally joins them to a domain.
 
 | Parameter Name    | What it does   | Default |
 | --- | --- | --- |
@@ -34,8 +32,8 @@ This is an empty template and parameters file with the schema reference and top-
 | addressSpace | CIDR block for the vnet and subnet. | 10.10.10.0/24 |
 
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)]("https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftescales%2Fazure-multivm-domainjoin%2Fmaster%2Fazuredeploy.json")  
-[![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)]("http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ftescales%2Fazure-multivm-domainjoin%2Fmaster%2Fazuredeploy.json")
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftescales%2Fazure-multivm-domainjoin%2Fmaster%2Fazuredeploy.json)  
+[![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ftescales%2Fazure-multivm-domainjoin%2Fmaster%2Fazuredeploy.json)
 
 ----
 services: `arm`
