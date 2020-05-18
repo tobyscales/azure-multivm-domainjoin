@@ -123,20 +123,6 @@
         "subnetName": {
             "defaultValue": "default",
             "type": "String"
-        },
-        "vnetAddressSpace": {
-            "type": "string",
-            "metadata": {
-                "description": "Address Space for the Virtual Network."
-            },
-            "defaultValue": "10.10.10.0/24"
-        },
-        "subnetAddressSpace": {
-            "type": "string",
-            "metadata": {
-                "description": "Address Space for the Virtual Network."
-            },
-            "defaultValue": "10.10.10.0/24"
         }
     },
     "variables": {
@@ -144,7 +130,7 @@
         "virtualMachineName": "[if(equals('default', parameters('virtualMachineName')),concat('vm-', variables('baseName')),parameters('virtualMachineName'))]",
         "virtualNetworkName": "[if(equals('default', parameters('virtualNetworkName')),concat('vn-', variables('baseName')),parameters('virtualNetworkName'))]",
         "subnetName": "[if(equals('default', parameters('virtualMachineName')),concat('sn-', variables('baseName')),parameters('subnetName'))]",
-        "virtualNetworkRef": "[resourceId('Microsoft.Network/virtualnetworks', variables('virtualNetworkName'))]",
+
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets',variables('virtualNetworkName'),variables('subnetName'))]",
         "domainJoinOptions": 3,
         "Ubuntu": {
