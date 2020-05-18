@@ -78,7 +78,7 @@
             }
         },
         "adminPasswordOrKey": {
-            "type": "string",
+            "type": "securestring",
             "metadata": {
                 "description": "Password for the VMs."
             },
@@ -176,33 +176,6 @@
         }
     },
     "resources": [
-        {
-            "condition": "[not(empty(variables('virtualNetworkRef')))]",
-            "type": "Microsoft.Network/virtualNetworks",
-            "apiVersion": "2017-09-01",
-            "name": "[variables('virtualNetworkName')]",
-            "location": "[parameters('location')]",
-            "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "[parameters('vnetAddressSpace')]"
-                    ]
-                }
-            }
-        },
-        {
-            "condition": "[not(empty(variables('subnetRef')))]",
-            "type": "Microsoft.Network/virtualNetworks/subnets",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(variables('virtualNetworkName'), '/', variables('subnetName'))]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[variables('virtualNetworkName')]"
-            ],
-            "properties": {
-                "addressPrefix": "[parameters('subnetAddressSpace')]"
-            }
-        },
         {
             "type": "Microsoft.Network/networkInterfaces",
             "name": "[concat('nic-',variables('virtualMachineName'),padleft(string(copyIndex(parameters('startNumberingAt'))),parameters('suffixLength'),'0'))]",
