@@ -168,7 +168,6 @@
             "apiVersion": "2016-03-30",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[variables('virtualNetworkName')]",
                 "[variables('subnetName')]"
             ],
             "copy": {
