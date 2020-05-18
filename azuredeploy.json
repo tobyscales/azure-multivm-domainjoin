@@ -167,9 +167,6 @@
             "name": "[concat('nic-',variables('virtualMachineName'),padleft(string(copyIndex(parameters('startNumberingAt'))),parameters('suffixLength'),'0'))]",
             "apiVersion": "2016-03-30",
             "location": "[parameters('location')]",
-            "dependsOn": [
-                "[variables('subnetName')]"
-            ],
             "copy": {
                 "name": "nicLoop",
                 "count": "[parameters('numberOfInstances')]"
