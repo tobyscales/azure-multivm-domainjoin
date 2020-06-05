@@ -67,5 +67,11 @@
                 "addressPrefix": "[parameters('addressSpaces')[copyIndex()]]"
             }
         }
-    ]
+    ],
+    "outputs": {
+         "vNetRef": {
+            "type": "string",
+            "value": "[variables('virtualNetworkRef')]"
+        }
+  }
 }
