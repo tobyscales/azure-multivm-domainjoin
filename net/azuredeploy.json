@@ -57,7 +57,7 @@
             "name": "[concat(variables('virtualNetworkName'), '/', variables('subnetName'), copyIndex())]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[variables('virtualNetworkRef')]"
+                "[variables('virtualNetworkName')]"
             ],
             "copy": {
                 "name": "subnetCopy",
@@ -72,6 +72,10 @@
          "vNetRef": {
             "type": "string",
             "value": "[variables('virtualNetworkRef')]"
+        },
+        "vNetName": {
+            "type": "string",
+            "value": "[variables('virtualNetworkName')]"
         }
   }
 }
