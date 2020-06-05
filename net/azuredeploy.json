@@ -37,7 +37,7 @@
     },
     "resources": [
         {
-            "condition": "[empty(variables('virtualNetworkRef'))]",
+            "condition": "[empty(reference(variables('virtualNetworkRef')))]",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2017-09-01",
             "name": "[variables('virtualNetworkName')]",
@@ -51,7 +51,7 @@
             }
         },
         {
-            "condition": "[empty(variables('subnetRef'))]",
+            "condition": "[empty(reference(variables('subnetRef')))]",
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2019-09-01",
             "name": "[concat(variables('virtualNetworkName'), '/', variables('subnetName'), copyIndex())]",
