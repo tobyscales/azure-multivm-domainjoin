@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworkName": {
+            "type": "String",
+            "metadata": {
+                "description": "Name of a new or existing virtual network to use for the VMs."
+            },
+            "defaultValue": "default"
+        },
+        "subnetName": {
+            "defaultValue": "default",
+            "type": "String"
+        },
+        "addressSpaces": {
+            "type": "array",
+            "metadata": {
+                "description": "Address Space for the Virtual Network. Only used if vnet does not exist."
+            },
+            "defaultValue": ["10.10.10.0/24"]
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        }
+    },
+    "variables": {
+        "baseName": "[take(replace(replace(resourceGroup().name, ' ', ''), '_', '-'),23)]",
+        "virtualNetworkName": "[if(equals('default', parameters('virtualNetworkName')),concat('vn-', variables('baseName')),parameters('virtualNetworkName'))]",
+        "subnetName": "[if(equals('default', parameters('subnetName')),concat('sn-', variables('baseName')),parameters('subnetName'))]",
+        "virtualNetworkRef": "[resourceId('Microsoft.Network/virtualnetworks', variables('virtualNetworkName'))]",
+        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets',variables('virtualNetworkName'),variables('subnetName'))]"
+    },
+    "resources": [
+        {
+            "condition": "[empty(variables('virtualNetworkRef'))]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2017-09-01",
+            "name": "[variables('virtualNetworkName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressSpaces')]"
+                    ]
+                }
+            }
+        },
+        {
+            "condition": "[empty(variables('subnetRef'))]",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2019-09-01",
+            "name": "[concat(variables('virtualNetworkName'), '/', variables('subnetName'), copyIndex())]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[variables('virtualNetworkRef')]"
+            ],
+            "copy": {
+                "name": "subnetCopy",
+                "count": "[length(createarray(parameters('addressSpaces')))]"
+            },
+            "properties": {
+                "addressPrefix": "[parameters('addressSpaces')[copyIndex()]]"
+            }
+        }
+    ]
+}
